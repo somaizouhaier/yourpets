@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        {% block block_head %}
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>{% block title %}{{nomProjet}}{% endblock title %}</title>
+            <!-- Js Tree Styles-->
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+                <link href="{{ asset('css/bootstrap.css')}}" rel="stylesheet" />
+                <link href="{{ asset('css/heroic-features.css')}}" rel="stylesheet" />
+                <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css" />
+                <link href="{{ asset('css/style2.css') }}" rel="stylesheet" type="text/css" />
+                <link href="{{ asset('css/css.css') }}" rel="stylesheet" type="text/css" />
+                <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet" type="text/css" />
+
+
+                <script src="{{ asset('js/jquery.js')}}"></script>
+                <script src="{{ asset('js/jquery-ui.js')}}"></script>
+                <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+
+                <script src="{{ asset('js/bootstrap-hover-dropdown.min.js')}}"></script>
+                <script src="{{ asset('js/dropzone.js')}}"></script>
+            {% endblock block_head %}
+    </head>
+    <body>
+        {% block block_javascript %}
+            <script>
+                $(function () {
+                    $(".datepicker").datepicker({
+                        showOtherMonths: true,
+                        selectOtherMonths: true,
+                        dateFormat: "dd/mm/yy",
+                        showAnim: "slideDown",
+                        regional: "fr",
+                        monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                        monthNamesShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
+                        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                        dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                        dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                    });
+                    var dropzone = new Dropzone("form.dropzone", {
+                        dictDefaultMessage: " Déposez vos fichiers ici",
+                        maxFiles: 1,
+                        accept: function (file, done) {
+                            console.log("uploaded");
+                            done();
+                        },
+                        init: function () {
+                            this.on("maxfilesexceeded", function (file) {
+                                alert("No more files please!");
+                            });
+                        }
+                    });
+
+                });
+
+            </script>
+        {% endblock block_javascript %}
+
+        {% include "::navbarPrincipal.html.twig" %}
+        {% block block_body %}
+        {% endblock block_body %}
+    </body>
+</html>

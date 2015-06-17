@@ -1,0 +1,14 @@
+{% extends "::layout.html.twig" %}
+{% block block_body %}
+    <div class="main-container community-logged">
+        <div class="container main ">
+        {% block block_left_menu %}
+            {% include 'atnUserBundle:Manage:left_menu_profil.html.twig' %}
+        {% endblock block_left_menu %}
+        {% block block_header %}{% endblock block_header %}
+        {% block block_content_body %}{% endblock block_content_body %}
+
+        </div>
+    </div>
+
+{% endblock block_body %}

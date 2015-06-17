@@ -1,0 +1,15 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: amimal
+    database_user: root
+    database_password: zouhaier
+    mailer_transport: gmail
+    mailer_host: null
+    mailer_user: testzouhaier@gmail.com
+    mailer_password: zouhaier89
+    locale: fr
+    secret: ThisTokenIsNotSoSecretChangeIt
+    nomProjet: Sikou Sikou

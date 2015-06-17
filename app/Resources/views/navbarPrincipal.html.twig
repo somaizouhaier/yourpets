@@ -1,0 +1,99 @@
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Amimal</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Amimal</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">{{ "Communauté"|upper }}</a></li>
+            <li class=""><a href="#">{{ "annonces"|upper }}</a></li>
+            <li class=""><a href="#">{{ "évenement"|upper }}</a></li>
+        </ul>
+        <div class="nav navbar-nav navbar-right">
+            {% if app.user %}
+                 <li class=""><a href="{{ path('fos_user_security_logout')}}" id="a_connecter">{{ "Déconnexion"|capitalize }}</a></li>
+            {% elseif not app.user %}
+                <li class=""><a href="{{ path('fos_user_security_login')}}" id="a_connecter">{{ "Se connecter"|capitalize }}</a></li>
+            <li class=""><a href="{{ path('fos_user_registration_register')}}" id="a_register">{{ "S'enregistrer"|capitalize }}</a></li>
+
+            {% endif %}
+                    </div>
+    </div>
+</nav>
+<script></script>
+
+
+
+<!---------------------------connexion avec ajax----------------------->
+{#
+<script>
+    function isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+$("#a_register").on('click',function () {
+        $.ajax({
+            url: "{{ path("fos_user_registration_register") }}",
+            type: 'POST',
+            data: "",
+            success: function (data) {
+                if (isJson(data))
+                    window.location.replace($.parseJSON(data).url);
+                else
+                     $('#register').html(data);
+                return true;
+            }
+        });
+
+    });
+    
+     $(document).on('click', '.button-submit-register', function() {
+    var data = 'fos_user_registration_form[username]='+$('#fos_user_registration_form_username').val();
+    data += '&fos_user_registration_form[email]='+$('#fos_user_registration_form_email').val();
+    data += '&fos_user_registration_form[plainPassword][first]='+$('#fos_user_registration_form_plainPassword_first').val();
+    data += '&fos_user_registration_form[plainPassword][second]='+$('#fos_user_registration_form_plainPassword_second').val();
+    data += '&fos_user_registration_form[_token]='+$('#fos_user_registration_form__token').val();
+        $.ajax({
+            url: "{{ path("fos_user_registration_register") }}",
+            type: 'POST',
+            data: data,
+            success: function (data) {
+                if (isJson(data))
+                    window.location.replace($.parseJSON(data).url);
+                else
+                     $('#register').html(data);
+                return true;
+            }
+        });
+
+    });
+    $("#a_connecter").click(function () {
+        $.ajax({
+            url: "{{ path("fos_user_security_login") }}",
+            type: 'POST',
+            dataType: "json",
+            data: "",
+            success: function (data) {
+                console.log(data);
+                consol.log(data.url);
+                $('#connecter').html(data);
+                return true;
+            }
+        });
+
+    });
+</script>
+<div id="register" class="modal" aria-hidden="true" style="display: none;"></div>
+<div id="connecter" class="modal "></div>
+#}
