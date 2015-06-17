@@ -1,0 +1,25 @@
+
+{% for commentaire in commentaires %}
+    {% if nombre_commentaire is defined %}
+        <input type="hidden" class="numeroCommentaire" value="{{ nombre_commentaire + loop.length }}">
+    {% else %}
+        <input type="hidden" class="numeroCommentaire" value="5">
+    {% endif %}
+    <input type="hidden" class="lengthCommentaire" value="{{ loop.length }}">
+    <li class="top-alignment ng-scope">
+        <a href="/pets/274021" ng-href="/pets/274021" class="left-thumb image-wrapper ng-scope" style="width:32px;height:32px" ng-switch-default=""> 
+            <img src="{{asset(commentaire.animal.imageProfile.href)}}" data-original="https://d2d0m32kr3hci1.cloudfront.net/unknown_1_160.jpg" class="user-avatar" width="100%"> 
+        </a>
+        <div class="user-comment">
+            <p class="feed-p-comment"> 
+                <strong>
+                    <a href="/pets/274021" class="ng-binding ng-scope" ng-href="/pets/274021" ng-switch-default=""> Lollyta </a>
+                </strong>
+                <span class="ng-binding">
+                    {{commentaire.labelle}}
+                </span> </p> 
+            <time class="date ng-binding">Hier à 22:00</time>
+        </div>
+    </li>
+
+{% endfor %}

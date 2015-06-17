@@ -1,0 +1,4 @@
+services:
+#    atn_main.example:
+#        class: atn\MainBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

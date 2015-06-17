@@ -1,0 +1,49 @@
+
+
+<div class="modal-dialog">
+<div class="modal-content">
+    
+    <div class="modal-header header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title" id="myModalLabel">Initialisez votre mot de passe</h4>
+    </div>
+    
+   <form  class="form-horizontal" action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="post">
+       
+ <div class="modal-body" >
+
+     <div class="form-group">
+         <table style="width: 100%"> 
+             <tr>
+                <td for="password" class="col-sm-5 control-label"><label>{{ form_label (form.new.first,'Votre nouveau mot de passe') }}</label></td>
+                <td> 
+                  <div class="col-sm-10">
+                    {{ form_widget (form.new.first,{ 'attr': {'class': 'form-control','placeholder': 'nouveau mot de passe'} }) }}
+                
+                 </div> 
+                </td>
+              </tr>
+          <tr><td>&nbsp;</td></tr>
+    <tr>
+             <td for="password" class="col-sm-5 control-label"><label>{{ form_label (form.new.second,'confirmer le mot de passe') }}</label></td>
+             <td> <div class="col-sm-10">
+        {{ form_widget (form.new.second,{ 'attr': {'class': 'form-control','placeholder': 'mot de passe'} }) }}
+                
+                 </div></td>
+         </tr>
+     </table>
+  </div>
+     
+ </div>
+       
+       
+        <div class="modal-footer">
+        
+         <button type="submit" id="_submit" name="_submit"  class="btn btn-danger">confirmer&nbsp&nbsp<span class="glyphicon glyphicon-chevron-right"></span></button>
+{{ form_rest(form) }}
+    </div>
+   </form>
+</div>
+</div>
+    
+

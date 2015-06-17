@@ -1,0 +1,16 @@
+{% extends "atnUserBundle::layout.html.twig" %}
+{% block user_content %}
+    <div class="yp-landing__hero-content">
+        <video autoplay="" poster="{{asset('images/sikou.png')}}" preload="auto" id="video" style="width: 100%"> 
+            <source src="{{asset('video/video_sikou.mp4')}}" type="video/mp4"> 
+            <source src="{{asset('video/video_sikou.webm')}}" type="video/webm"> 
+        </video>
+    </div>
+    <script>
+        var aud = document.getElementById('video');
+        aud.currentTime = 0.2;
+        aud.addEventListener("ended", function () {
+            this.currentTime = 0.2;
+        });
+    </script>
+{% endblock user_content %}

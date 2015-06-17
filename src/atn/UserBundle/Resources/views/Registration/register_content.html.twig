@@ -1,0 +1,65 @@
+{% form_theme form 'atnUserBundle:Form:fieldsCoordonnees.html.twig' %}
+<div class="container main ">
+    <div class="container basic-page">
+        <div class="content-main  pull-left">
+            <h1 class="content-main-title is-uppercase nomargin">Nouveau sur {{ nomProjet }}</h1>
+            <span class="error-form">* Les champs suivis d'un astérisque sont obligatoires</span>
+
+            <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="site-form form-horizontal">
+
+                <div class="site-form-inner">
+                    <div class="form-group last-group">
+                        <div class="site-form-group-title">Mes coordonnées</div>
+                        
+                        <div class="field-group">
+                            {{ form_label(form.firstName, label|default(null), { 'label_attr': {'class': 'control-label'} })}}                                                    
+                            <div class="control-field control-field-large">
+                                {{ form_errors(form.firstName)}}
+                                {{ form_widget(form.firstName, { 'attr': {'class': 'form-control'} })}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="field-group">
+                            {{ form_label(form.lastName, label|default(null), { 'label_attr': {'class': 'control-label'} })}}                                                    
+                            <div class="control-field control-field-large">
+                                {{ form_errors(form.lastName)}}
+                                {{ form_widget(form.lastName, { 'attr': {'class': 'form-control'} })}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="field-group">
+                            {{ form_label(form.email, label|default(null), { 'label_attr': {'class': 'control-label'} })}}                                                    
+                            <div class="control-field control-field-large">
+                                {{ form_errors(form.email)}}
+                                {{ form_widget(form.email, { 'attr': {'class': 'form-control'} })}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="field-group">
+                            {{ form_label(form.plainPassword.first, label|default(null), { 'label_attr': {'class': 'control-label'} })}}                                                    
+                            <div class="control-field control-field-large">
+                                {{ form_errors(form.plainPassword.first)}}
+                                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'} })}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="field-group">
+                            {{ form_label(form.plainPassword.second, label|default(null), { 'label_attr': {'class': 'control-label'} })}}                                                    
+                            <div class="control-field control-field-large">
+                                {{ form_errors(form.plainPassword.second)}}
+                                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'} })}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    {{ form_rest(form) }}
+                </div>
+
+                <div class="clearfix"></div>
+
+                <input type="submit" name="contact-submit" id="contact-submit" value="Je valide" class="btn btn-style is-bold btn-style-white-arrow btn-submit pull-right" style="margin-top: 4%">
+
+            </form>
+        </div>
+    </div>
+</div>

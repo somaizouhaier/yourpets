@@ -1,0 +1,167 @@
+{% extends "::layout_connected.html.twig" %}
+{% block block_header %}
+    <div class="status-composer profil-content">
+        <ul class="text-and-upload"> 
+            <li> 
+                <a class="poster" href="#" > 
+                    <span class="yp-icn yp-icn-media"></span>
+                    Poster une photo / vidéo 
+                </a> 
+            </li> 
+        </ul>
+
+
+        <div class="uploaded-file yp-bloc cf Block-uploadFile" style="display: none">
+            <form id="acme_dropzone_form" enctype="multipart/form-data" action="{{ path('atn_media_add') }}" method="post" class="ng-pristine ng-invalid ng-invalid-required">
+                <div class="image-wrapper upload-thumb" style="float: left;height: 126px;width: 182px;">
+                    <output id="list"></output>
+                </div>
+                {{ form_widget(form.file, { 'attr': {'class': 'input-description', 'accept': 'image/*','capture': 'camera','style': 'display: none'} })}}
+
+                <div class="upload-form">
+                    <p class="label-description">description</p>
+                    {{ form_widget(form.description, { 'attr': {'class': 'input-description'} })}}
+                </div>
+                <input type="submit" class="submit-publier" value="Publier">
+                {{ form_end(form) }}
+                </div>
+
+
+                <script type="text/javascript">
+                    $('.poster').click(function () {
+                        $('#atn_media_image_add_file').click();
+                    });
+                    function handleFileSelect(evt) {
+                        var files = evt.target.files; // FileList object
+
+
+                        // Loop through the FileList and render image files as thumbnails.
+                        for (var i = 0, f; f = files[i]; i++) {
+
+                            // Only process image files.
+                            if (!f.type.match('image.*')) {
+                                continue;
+                            }
+
+                            var reader = new FileReader();
+
+                            // Closure to capture the file information.
+                            reader.onload = (function (theFile) {
+
+                                return function (e) {
+                                    $('.thumbNew').remove();
+                                    $('.Block-uploadFile').show('slow');
+                                    // Render thumbnail.
+                                    var span = document.createElement('span');
+                                    span.innerHTML = ['<img width="100%" height="100%" class="thumbNew" src="', e.target.result,
+                                        '" title="', escape(theFile.name), '"/>'].join('');
+                                    document.getElementById('list').insertBefore(span, null);
+                                };
+                            })(f);
+
+                            // Read in the image file as a data URL.
+                            reader.readAsDataURL(f);
+                        }
+                    }
+
+                    document.getElementById('atn_media_image_add_file').addEventListener('change', handleFileSelect, false);
+                </script>
+        </div>
+    {% endblock block_header %}
+    {% block block_content_body %}
+
+        <div class="profil-content">
+
+            {% for media in medias %}
+                <div class="user-pets">
+                    <div class="post-media-wrapper">
+                        <a href=""> 
+                            <img src="{{asset(media.href)}}" alt="{{media.alt}}" class="post-content-media" width="100%"> 
+                        </a>
+                        <ul class="stats">
+                            <li>
+                                <a class="yp-icn yp-icn-paw ng-binding yummied">j'aime</a>
+                            </li>
+                            <li>
+                                <a class="yp-icn yp-icn-bubble">commentaire</a>
+                            </li>
+                        </ul>
+                        <div class="post-comments ng-isolate-scope divCommentaire" >
+                            <input type="hidden" class="imageee" value="{{media.id}}">
+                            <input type="hidden" class="id_animal" value="{{app.request.get('id')}}">
+                            <a class="see-comments clickComment">
+                                <span class="yp-icn yp-icn-bubble"></span>
+                                Voir tous les commentaires 
+                            </a>
+                            <div class="ng-isolate-scope blockListCommentaire">
+                                <ul class="comment-listing ng-scope listCommentaires">
+                                    {% include 'atnAnimalBundle:Animal:block_commentaire.html.twig' with {'commentaires': commentaires[media.id], 'foo': 'bar'} %}
+                                </ul>
+                                <ul class="comment-listing ng-scope">
+                                    <li>
+                                <div class="leave-comment top-alignment ng-pristine ng-valid ng-scope"> 
+                                    <img src="{{asset(animal.imageProfile.href)}}"class="user-avatar left-thumb" width="32">
+                                
+                                    <div class="leave-comment-content top-alignment">
+                                        <input class="input_comment message" name="message" placeholder="Ajouter un commentaire" required=""type="text"> 
+                                    </div> 
+                                </div> 
+                                    </li>
+                                    </ul>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        $(".message").keyup(function (event) {
+            if (event.keyCode == 13) {
+                var $this = $(this);
+                $.ajax({
+                    url: "{{path('atn_commentaire_add')}}",
+                    data: {commentaire: $this.val(), id_user_image: $this.closest('.divCommentaire').find('.imageee').val(), id_animal: $this.closest('.divCommentaire').find('.id_animal').val()},
+                    success: function (data) {
+                        $this.closest('.ng-isolate-scope').find('.listCommentaires').append(data);
+                        $this.val("");
+
+                    }
+                });
+            }
+        });
+
+        $(".clickComment").click(function (event) {
+            var $this = $(this);
+            $.ajax({
+                url: "{{path('atn_commentaire_more')}}",
+                data: {image_id: $this.closest('.divCommentaire').find('.imageee').val(), nombre_commentaire: $this.closest('.divCommentaire').find('.numeroCommentaire').val()},
+                success: function (data) {
+                    $this.closest('.divCommentaire').find('.comment-listing').prepend(data);
+                    if ($(data).filter('.lengthCommentaire').val() != "5") {
+                        $this.closest('.divCommentaire').find('.clickComment').remove();
+                    }
+
+                }
+            });
+        });
+
+             $(window).scroll(function() {
+                if (  document.documentElement.clientHeight + 
+                  $(document).scrollTop() >= document.body.offsetHeight )
+            { 
+                $.ajax({
+                        url: "{{path('atn_media_more')}}",
+                        data: {offset: 0},
+                        success: function (data) {
+                            $('.profil-content').append(data);
+
+                        }
+                    });
+            }
+                });
+
+    </script>
+{% endblock block_content_body %}
+

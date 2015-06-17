@@ -1,0 +1,48 @@
+{% block form_label %}
+
+    {% if not compound %}
+        {% set label_attr = label_attr|merge({'for': id}) %}
+    {% endif %}
+    {% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %} 
+    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        {% if (name == "utilisateurEmailParrain") %}
+            <i class="sprite1 inline-block sp-ico-informations2 img-top"></i>
+        {% endif %}
+        {{ label }}
+        {% if required %}
+            <span class="error-form" title="Ce champ est obligatoire">*</span>
+        {% endif %}      
+        {% if (name == "libelleQuestionSecrete") %}
+            <a href="javascript:void(0)" data-toggle="tooltip" class="infobulle" title="" data-original-title="La question de sécurite vous permet de modifier ou changer vos coordonnées bancaires">(?)</a>
+        {% endif %}
+    </label>
+{% endblock %}
+
+{% block choice_widget_options %}
+    {% spaceless %}
+        {% for group_label, choice in options %}
+            {% if choice is iterable %}
+                <optgroup label="{{ group_label|trans({}, translation_domain) }}">
+                    {% set options = choice %}
+                    {{ block('choice_widget_options') }}
+                </optgroup>
+            {% else %}
+                {% if name == 'paysIndFixe' or name == 'paysIndMobile' %}
+                    {% set tableauPays = app.session.get('tableauPays') %}
+                    <option value="{{ choice.value }}" {% if choice is selectedchoice(value) %}selected="selected"{% endif %} data-image="{{asset('img/blank.png')}}" data-imagecss="flag {{tableauPays[choice.value].paysCode|lower}}" data-title="{{tableauPays[choice.value].pays}}">
+                          &nbsp;{{tableauPays[choice.value].paysCode}} +{{ choice.label|trans({}, translation_domain) }}
+                    </option>
+                {% elseif name == 'langue' %}
+                    {% set tableauLangues = app.session.get('tableauLangues') %}
+                    <option value="{{ choice.value }}" {% if choice is selectedchoice(value) %}selected="selected"{% endif %} data-image="{{asset('img/blank.png')}}" data-imagecss="flag {{tableauLangues[choice.value].langueCode|lower}}" data-title="{{tableauLangues[choice.value].langue}}">
+                          &nbsp;{{ choice.label|trans({}, translation_domain) }}
+                    </option>
+                {% else %}
+                    <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label|trans({}, translation_domain) }}</option>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endspaceless %}
+{% endblock choice_widget_options %}

@@ -1,0 +1,130 @@
+{% extends "atnUserBundle::layout.html.twig" %}
+{% form_theme form 'atnUserBundle:Form:fieldsCoordonnees.html.twig' %}
+
+{% block user_content %}
+
+    <div class="container main ">
+        <div class="container basic-page">
+            <div class="content-main  pull-left">
+                <h1 class="content-main-title is-uppercase nomargin">Mon animal</h1>
+                <span class="error-form">* Les champs suivis d'un astérisque sont obligatoires</span>
+
+                <form action="{{ path('atn_amimal_add') }}" {{ form_enctype(form) }} method="POST" class="site-form form-horizontal">
+
+                    <div class="site-form-inner">
+                        <div class="form-group last-group">
+                            <div class="site-form-group-title">Mes coordonnées</div>
+
+                            <div class="field-group">
+                                {{ form_label(form.pseudo, label|default(null), { 'label_attr': {'class': 'control-label'} })}}                                                    
+                                <div class="control-field control-field-large">
+                                    {{ form_errors(form.pseudo)}}
+                                    {{ form_widget(form.pseudo, { 'attr': {'class': 'form-control'} })}}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="field-group">
+                                {{ form_label(form.description, label|default(null), { 'label_attr': {'class': 'control-label'} })}}                                                    
+                                <div class="control-field control-field-large">
+                                    {{ form_errors(form.description)}}
+                                    {{ form_widget(form.description, { 'attr': {'class': ''} })}}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="field-group">
+                                {{ form_label(form.type, label|default(null), { 'label_attr': {'class': 'control-label'} })}}                                                    
+                                <div class="control-field control-field-large">
+                                    {{ form_errors(form.type)}}
+                                    {{ form_widget(form.type, { 'attr': {'class': 'form-control'} })}}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="field-group">
+                                {{ form_label(form.race, label|default(null), { 'label_attr': {'class': 'control-label'} })}}                                                    
+                                <div class="control-field control-field-large">
+                                    {{ form_errors(form.race)}}
+                                    {{ form_widget(form.race, { 'attr': {'class': 'form-control'} })}}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="field-group">
+                                {{ form_label(form.dateNaissance, label|default(null), { 'label_attr': {'class': 'control-label '} })}}                                                    
+                                <div class="control-field control-field-large">
+                                    {{ form_errors(form.dateNaissance)}}
+                                    {{ form_widget(form.dateNaissance, { 'attr': {'class': 'form-control datepicker'} })}}
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="field-group">
+                                {{ form_label(form.file, label|default(null), { 'label_attr': {'class': 'control-label '} })}}                                                    
+
+                                <span class="control-field-large upload-file"> 
+                                    <span class="yp-btn upload-left ng-binding"> 
+                                        Choisir une photo
+                                        {{ form_widget(form.file, { 'attr': {'class': 'upload-input ng-pristine ng-valid ng-isolate-scope ng-touched'} })}}
+                                    </span> 
+                                    <span class="upload-right"> 
+                                        <span class="upload-filename ng-binding">  
+                                        </span> 
+                                    </span> 
+                                </span>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{form_rest(form)}}
+                    <input type="submit" name="contact-submit" id="contact-submit" value="Je valide" class="btn btn-style is-bold btn-style-white-arrow btn-submit pull-right" style="margin-top: 4%">
+                </form>
+            </div>
+
+            <div class="content-main-sidebar pull-left">
+                <div class="content-main-sidebar-block with-shadow content-main-sidebar-user-info">
+                    <img src="http://d83vwgwvylun0.cloudfront.net/img/752Race.jpg" id="photoAnimalRace" width="100%">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $.ajax({
+            dataType: "json",
+            url: "{{path('atn_amimal_race_ajax')}}",
+            data: {id_type: $('#atn_animal_add_type').val()},
+            success: function (data) {
+                $('#atn_animal_add_race').html("");
+                $.each(data.type, function (i, val) {
+                    $('#atn_animal_add_race').append('<option value="' + val.id + '" photo="' + val.image + '">' + val.labelle + '</option>');
+                });
+
+            }
+        });
+        $('#atn_animal_add_type').change(function () {
+            $.ajax({
+                dataType: "json",
+                url: "{{path('atn_amimal_race_ajax')}}",
+                data: {id_type: $('#atn_animal_add_type').val()},
+                success: function (data) {
+                    $('#atn_animal_add_race').html("");
+                    $.each(data.type, function (i, val) {
+                        $('#atn_animal_add_race').append('<option value="' + val.id + '" photo="' + val.image + '">' + val.labelle + '</option>');
+                    });
+
+                }
+            });
+        });
+
+//--------------------------upload fichier-------------------------------
+        $('#atn_animal_add_race').change(function () {
+            var optionSelected = $('#atn_animal_add_race').find('[value="' + $(this).val() + '"]');
+            $('#photoAnimalRace').attr('src', optionSelected.attr('photo'));
+        })
+        document.getElementById("atn_animal_add_file").onchange = function () {
+            $('.upload-filename').html(this.value);
+        };
+//--------------------------fin upload fichier-------------------------------
+    </script>
+
+{% endblock user_content %}

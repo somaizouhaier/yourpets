@@ -1,0 +1,19 @@
+atn_media_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: atnMediaBundle:Default:index }
+    
+atn_media_add:
+    path:     /media/add
+    defaults: { _controller: atnMediaBundle:Media:add }
+    
+atn_media_more:
+    path:     /media/more
+    defaults: { _controller: atnMediaBundle:Media:more }
+    
+atn_commentaire_add:
+    path:     /commentaire/add
+    defaults: { _controller: atnMediaBundle:Commentaire:add }
+    
+atn_commentaire_more:
+    path:     /commentaire/more
+    defaults: { _controller: atnMediaBundle:Commentaire:more }

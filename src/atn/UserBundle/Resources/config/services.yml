@@ -1,0 +1,12 @@
+services:
+    atn_user_registration.form.type:
+        class: atn\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: atn_user_registration}
+            
+    atn_user_profile:
+        class: atn\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: atn_user_profile}

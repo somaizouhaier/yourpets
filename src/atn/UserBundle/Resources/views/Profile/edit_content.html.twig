@@ -1,0 +1,42 @@
+<div class="profil-content">
+    <div class="user-settings">
+        <div class="main-content-660 yp-bloc">
+            <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="site-form form-horizontal ">
+              <div class="site-form-inner">
+                        <div class="form-group last-group">
+                            <span class="site-form-group-title">Connexion</span>
+                <div class="field-group">
+                    {{ form_label(form.firstName, label|default(null), { 'label_attr': {'class': 'control-label'} })}}
+                    <div class="control-field control-field-large">
+
+                        {{ form_errors(form.firstName)}}
+                        {{ form_widget(form.firstName, { 'attr': {'class': 'form-control'} })}}
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="field-group">
+                    {{ form_label(form.lastName, label|default(null), { 'label_attr': {'class': 'control-label'} })}}
+                    <div class="control-field control-field-large">
+
+                        {{ form_errors(form.lastName)}}
+                        {{ form_widget(form.lastName, { 'attr': {'class': 'form-control'} })}}
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                
+                {{ form_rest(form) }}
+                
+                <div>
+                    <input type="submit" name="contact-submit" id="contact-submit" value="Je modifie" class="btn btn-style is-bold btn-style-white-arrow btn-submit pull-right" style="margin-top: 4%">
+                
+                    </div>
+                </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>

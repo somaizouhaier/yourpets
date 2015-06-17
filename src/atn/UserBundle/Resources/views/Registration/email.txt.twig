@@ -1,0 +1,12 @@
+{% block subject %}
+{% autoescape false %}
+Valider l'inscription
+{% endautoescape %}
+{% endblock %}
+{% block body_text %}
+{% autoescape false %}
+    Bonjour {{ user.username }} 
+    <a href="{{ confirmationUrl }}">cliquerici</a>
+{% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}

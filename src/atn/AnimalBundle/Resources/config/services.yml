@@ -1,0 +1,4 @@
+services:
+#    atn_animal.example:
+#        class: atn\AnimalBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

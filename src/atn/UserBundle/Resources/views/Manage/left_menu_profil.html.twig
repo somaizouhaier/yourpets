@@ -1,0 +1,28 @@
+<div class="user-sidebar community-layout-left">
+        <div class="profile-infos-container ng-scope">
+            <a href="/pets/274783" ui-sref="petsview.index({id:currentPet.id})" class="left-thumb"> <img src="https://d2d0m32kr3hci1.cloudfront.net/unknown_6_160.jpg" ng-src="https://d2d0m32kr3hci1.cloudfront.net/unknown_6_160.jpg" class="user-avatar" height="" width="48"> </a>
+            <div class="profile-main-informations middle-alignment"> 
+                
+                <header> 
+                    <h1 class="profile-pseudo museo-title"> 
+                        <a href="/pets/274783" class="ng-binding" ui-sref="petsview.index({id:currentPet.id})"> {{'Amimal.name'}} </a> 
+                    </h1> 
+                </header> 
+                <!--<a href="/pets/edit" class="pet-edit-link baseline ng-binding" ui-sref="petsEdit">Gérer mon profil</a>-->
+            
+                    
+            </div>
+        </div>
+                    <div style="height:30px"></div>
+        <div class="user-navigation"> 
+                        <ul>
+                            <li class="ng-scope" ng-if="displayAuthorProfile">
+                                <a href="{{path('fos_user_profile_edit')}}" class="yp-icn-feed-small ng-binding"> Gérer mon profil  </a> 
+                            </li>
+                            <li class="ng-scope" ng-if="displayAuthorProfile">
+                                <a href="{{path('atn_amimal_list')}}" class="yp-icn-message ng-binding"> Gérer mes animaux   </a> 
+                            </li>
+                        </ul>
+                        
+                    </div>
+    </div>

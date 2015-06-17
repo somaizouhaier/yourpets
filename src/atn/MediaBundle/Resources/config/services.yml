@@ -1,0 +1,5 @@
+services:
+    atn_user_profile.form.type:
+        class: atn\MediaBundle\Form\addImageFormType
+        tags:
+            - { name: form.type, alias: atn_media_image_add}

@@ -1,0 +1,72 @@
+{% extends "atnUserBundle::layout.html.twig" %}
+{% block block_body %}
+<div class="container main ">
+    <div class="container basic-page">
+        <div class="content-main  pull-left">
+            <h1 class="content-main-title is-uppercase nomargin">Mon compte</h1>
+            <span class="error-form">* Les champs suivis d'un astérisque sont obligatoires</span>
+
+ <form action="{{ path("fos_user_security_check",{'subdomain': app.request.get('subdomain')}) }}" method="post" class="site-form form-horizontal"> 
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    <div class="site-form-inner">
+                        <div class="form-group last-group">
+                            <span class="site-form-group-title">Connexion</span>
+
+                            <div class="field-group">
+                                <label class="control-label" for="username">E-mail</label>
+                                <div class="control-field control-field-large">
+                                    <input type="text" class="form-control form-control-email" id="username" name="_username" value="{{ last_username }}" required="required" />
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="field-group">
+                                <label class="control-label" for="password">Mot de passe</label>
+                                <div class="control-field control-field-large">
+                                    <input type="password" class="form-control form-control-password" id="password" name="_password" required="required" />
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="field-group">
+                                <div class="checkbox pull-left">
+                                    <input type="checkbox" id="remember_me" name="_remember_me" class="css-checkbox" value="on" checked />
+                                    <label for="remember_me" class="css-label css-label5">rester connecter</label>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="clearfix"></div>
+                    <div class="pull-right">
+                        <input type="submit" name="contact-submit" id="contact-submit" value="Se connecter" class="btn btn-style is-bold btn-style-white-arrow btn-submit pull-right" style="margin-top: 4%">
+
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+        </div>
+                    </div>
+                    </div>
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+    var intputElements = document.getElementsByTagName("INPUT");
+    for (var i = 0; i < intputElements.length; i++) {
+        intputElements[i].oninvalid = function (e) {
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
+                if (e.target.name === "username") {
+                    e.target.setCustomValidity("Vous devez entrer un pseudonyme!");
+                }
+                else {
+                    e.target.setCustomValidity("Vous devez entrer un mot de passe!");
+                }
+            }
+        };
+    }
+})
+                            </script>
+                            {% endblock block_body %}
+
+

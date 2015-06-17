@@ -1,0 +1,33 @@
+{% extends "::layout_connected.html.twig" %}
+
+{% block block_content_body %}
+    <div class="profil-content">
+        <div class="user-pets">
+            <ul class="user-pets-listing">
+                {% for animal in animals %}
+                <li>
+                    <div class="user-pets-choice">
+                        <a href="{{path('atn_amimal_profil',{id: animal.id})}}"class="img-circle"> 
+                            <img src="{{asset(animal.imageProfile.href)}}" alt="{{animal.imageProfile.alt}}" class="user-avatar"> 
+                        </a>
+                        <div class="user-petname-wrapper"> 
+                            <strong class="museo-title ng-binding">{{animal.pseudo}}</strong> 
+                        </div>
+                        <div class="choose-pet-btn-wrapper"> 
+                            <a class="yp-btn yp-btn--smaller choose-pet-btn" >Choisir cet animal</a> 
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+    </div>
+{% endblock block_content_body %}
+{% block block_header %}
+    <header class="profile-title ng-scope"> 
+        <h1 class="ng-binding">Mes animaux</h1> 
+    </header>
+    <a href="{{path('atn_amimal_add')}}" ui-sref="petsNew" class="pet-cta yp-btn ng-binding">Ajouter un animal</a>
+{% endblock block_header %}

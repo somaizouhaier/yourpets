@@ -1,0 +1,18 @@
+atn_amimal_homepage:
+    path:     /
+    defaults: { _controller: atnAnimalBundle:Animal:index }
+    
+atn_amimal_list:
+    path:     /list
+    defaults: { _controller: atnAnimalBundle:Animal:list }
+
+atn_amimal_add:
+    path:     /add
+    defaults: { _controller: atnAnimalBundle:Animal:add }
+    
+atn_amimal_race_ajax:
+    path:     /getRace
+    defaults: { _controller: atnAnimalBundle:Animal:getRace }
+atn_amimal_profil:
+    path:     /profil/{id}
+    defaults: { _controller: atnAnimalBundle:Animal:profil }
